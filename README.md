@@ -40,6 +40,8 @@ If the NNUE file is missing, the engine automatically switches to classical eval
 - INT8 quantization was tested but showed no measurable performance improvement
 
 The ONNX model is optimized for inference and integrated into the Rust engine.
+The model is using for scoring moves.
+The model is included on .exe. ML model shouldn't be on the same path with engine.
 
 ## Usage
 
