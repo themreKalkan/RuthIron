@@ -552,7 +552,7 @@ impl ImprovedUciEngine {
 
     fn eval_command(&self) {
         if let Ok(pos) = self.position.read() {
-            // Gösterge bilgisi
+            
             let side = if pos.side_to_move == Color::White { "White" } else { "Black" };
             let piece_count = pos.all_pieces().count_ones();
             
@@ -562,40 +562,27 @@ impl ImprovedUciEngine {
             println!("FEN: {}", pos.to_fen());
             println!();
             
-            // NNUE detaylı değerlendirme
+            
             if let Some(detail) = crate::eval::evaluate::evaluate_nnue_detailed(&pos) {
                 println!("NNUE network contributions ({} to move)", side);
-                println!("+-----------+------------+------------+------------+");
-                println!("|  Bucket   |  Material  | Positional |   Total    |");
-                println!("|           |   (PSQT)   |  (Layers)  |            |");
-                println!("+-----------+------------+------------+------------+");
                 
-                /* 
-                for (i, bucket_val) in detail.bucket_values.iter().enumerate() {
-                    let marker = if i == detail.bucket { " <-- this bucket is used" } else { "" };
-                    println!("| {:^9} | {:>10.2} | {:>10.2} | {:>10.2} |{}",
-                             i,
-                             bucket_val.material,
-                             bucket_val.positional,
-                             bucket_val.total,
-                             marker);
-                } */
+               
                 
                 println!("+-----------+------------+------------+------------+");
                 
                 let nnue_pawns = detail.nnue_eval as f32 / 100.0;
-               // let final_pawns = detail.final_eval as f32 / 100.0;
+               
                 
                 println!("NNUE evaluation      {:>+7.2} ({} side)", nnue_pawns, side.to_lowercase());
-               // println!("Final evaluation     {:>+7.2} ({} side) [with scaled NNUE, ...]", final_pawns, side.to_lowercase());
+               
                 println!();
             } else {
-                // NNUE yüklenememişse klasik değerlendirme
+                
                 println!("NNUE not available, using classical evaluation:\n");
                 crate::eval::evaluate::print_evaluation(&pos);
             }
             
-            // Ek bilgiler
+            
             let moves = generate_legal_moves(&pos);
             println!("Legal moves: {}", moves.len());
             for mv in moves{
@@ -688,10 +675,10 @@ impl ImprovedUciEngine {
     
     let is_white_to_move = position.side_to_move == Color::White;
     
-    // Ply hesapla: fullmove_number ve side_to_move'dan
-    // fullmove 1'den başlar, ply 0'dan başlar
-    // Beyaz oynarken: (fullmove - 1) * 2
-    // Siyah oynarken: (fullmove - 1) * 2 + 1
+    
+    
+    
+    
     let ply = (position.fullmove_number.saturating_sub(1) as u32) * 2 
             + if is_white_to_move { 0 } else { 1 };
     
@@ -763,7 +750,7 @@ impl ImprovedUciEngine {
         i += 1;
     }
 
-    // movetime için overhead çıkar (opsiyonel - TimeManager'da da var)
+    
     if let Some(mt) = params.movetime {
         params.movetime = Some(mt.saturating_sub(self.move_overhead as u32));
     }
@@ -781,7 +768,7 @@ impl ImprovedUciEngine {
         ply,
     );
 
-    // Eğer go komutunda multipv belirtilmediyse engine ayarını kullan
+    
     if params.multi_pv == 1 {
         params.multi_pv = self.multi_pv;
     }
