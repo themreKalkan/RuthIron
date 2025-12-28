@@ -2,7 +2,7 @@ use std::time::{Instant, Duration};
 
 const MOVE_OVERHEAD_MS: u64 = 50;
 
-const MIN_DEPTH_LIMIT: u32 = 14;
+const MIN_DEPTH_LIMIT: u32 = 12;
 
 #[derive(Debug, Clone)]
 pub struct TimeManager {
@@ -601,4 +601,5 @@ mod tests {
         assert!(!tm.should_stop(start, 9), "Derinlik 9'da durmamalı");
         
     }
+
 }
