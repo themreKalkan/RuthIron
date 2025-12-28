@@ -25,7 +25,7 @@ use std::time::{Duration, Instant};
 
 const ENGINE_NAME: &str = "RuthIron";
 const ENGINE_AUTHOR: &str = "EmreKalkan";
-const ENGINE_VERSION: &str = "3.0";
+const ENGINE_VERSION: &str = "14.1";
 const DEFAULT_TT_SIZE_MB: usize = 256;
 const MIN_TT_SIZE_MB: usize = 1;
 const MAX_TT_SIZE_MB: usize = 32768;
