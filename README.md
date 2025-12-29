@@ -50,7 +50,7 @@ The model is included on .exe. ML model shouldn't be on the same path with engin
 3. Load the engine in any UCI-compatible GUI:
    - CuteChess
    - ChessBase
-   - Arena
+   - LucasChess
    - etc.
 
 If the NNUE file is not detected, the engine will run using classical evaluation.
